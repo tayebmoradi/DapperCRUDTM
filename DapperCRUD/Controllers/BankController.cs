@@ -38,7 +38,7 @@ namespace DapperCRUD.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Bank bank,[FromBody] IFormFile Photo)
+        public async Task<IActionResult> Create(Bank bank, IFormFile Photo)
         {
             if (ModelState.IsValid)
             {
