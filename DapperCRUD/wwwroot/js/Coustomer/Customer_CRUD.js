@@ -1,5 +1,5 @@
 
-var DeleteCoutomer = function (id) {
+var DeleteBranch = function (id) {
     Swal.fire({
         title: 'Do you want to delete this item?',
         icon: 'warning',
@@ -11,9 +11,9 @@ var DeleteCoutomer = function (id) {
         if (result.value) {
             $.ajax({
                 type: "DELETE",
-                url: "Branch/DeleteConfirmed/" + id,
+                url: "Customer/DeleteConfirmed/" + id,
                 success: function (result) {
-                    var message = "Branch has been deleted successfully.";
+                    var message = "Customer has been deleted successfully.";
                     Swal.fire({
                         title: message,
                         icon: 'info',
