@@ -5,8 +5,8 @@ namespace DapperCRUD.Repository
     public interface IAddressRepository
     {
         Task<AddressDto> GetByAddres(int id);
-        Task Create(Customer _Customer);
-        Task Update(Customer _Customer);
+        Task Create(Address _address);
+        Task Update(Customer _customer);
         Task Delete(int id);
     }
 }

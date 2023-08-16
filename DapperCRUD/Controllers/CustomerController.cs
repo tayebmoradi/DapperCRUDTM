@@ -7,9 +7,11 @@ namespace DapperCRUD.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerRepository _customerRepository;
-        public CustomerController(ICustomerRepository customerRepository) 
+        private readonly IAddressRepository _addressRepository;
+        public CustomerController(ICustomerRepository customerRepository, IAddressRepository addressRepository) 
         {
            _customerRepository = customerRepository;
+            _addressRepository = addressRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -21,6 +23,12 @@ namespace DapperCRUD.Controllers
         public async Task<IActionResult> Address(int id)
         {
             var result = await _customerRepository.GetAddressesAsync(id);
+            return View(result);
+        }
+
+        public async Task<IActionResult> DetailsAddress(int id)
+        {
+            var result = await _addressRepository.GetByAddres(id);
             return View(result);
         }
 
@@ -45,6 +53,23 @@ namespace DapperCRUD.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(customer);
+        }
+
+        public IActionResult CreateAddress()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAddress(Address address)
+        {
+            if (ModelState.IsValid)
+            {
+
+                await _addressRepository.Create(address);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(address);
         }
         public async Task<IActionResult> Edit(int id)
         {

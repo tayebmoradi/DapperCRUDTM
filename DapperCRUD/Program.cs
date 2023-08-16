@@ -12,6 +12,7 @@ builder.Services.AddTransient<IDapperContext, DapperContext>();
 builder.Services.AddTransient<IBranchRepository, BranchRepository>();
 builder.Services.AddTransient<IBankRepository, BankRepository>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
+builder.Services.AddTransient<IAddressRepository, AddressRepository>();
 
 
 
