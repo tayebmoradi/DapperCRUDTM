@@ -16,7 +16,7 @@ namespace DapperCRUD.Repository
 
         public async Task Create(Customer _Customer)
         {
-            var query = "INSERT INTO " + typeof(Branch).Name + " (Name, Family,Phone,NationalCode,Mobile) VALUES (@Name, @Family,@Phone,@NationalCode,@Mobile)";
+            var query = "INSERT INTO " + typeof(Customer).Name + " (Name, Family,Phone,NationalCode,Mobile) VALUES (@Name, @Family,@Phone,@NationalCode,@Mobile)";
             var parameters = new DynamicParameters();
             parameters.Add("Name", _Customer.Name, DbType.String);
             parameters.Add("Family", _Customer.Family, DbType.String);
@@ -46,7 +46,7 @@ namespace DapperCRUD.Repository
 
         public async Task<CustomerDto> GetByIdAsync(int id)
         {
-            var query = "select br.*,b.Name bankname from Branch as br join Bank as b on b.Id=br.BankId  WHERE br.Id = @Id";
+            var query = "select * from Customer WHERE Id = @Id";
 
             using (var connection = _context.CreateConnection())
             {
@@ -57,7 +57,7 @@ namespace DapperCRUD.Repository
 
         public async Task Update(Customer _Customer)
         {
-            var query = "UPDATE Branch SET Name = Name, Family =Family ,Phone = Phone,NationalCode = NationalCode,Mobile=Mobile    WHERE Id = @Id";
+            var query = "UPDATE Customer SET Name = Name, Family =Family ,Phone = Phone,NationalCode = NationalCode,Mobile=Mobile    WHERE Id = @Id";
             var parameters = new DynamicParameters();
             parameters.Add("Id", _Customer.Id, DbType.Int64);
             parameters.Add("Name", _Customer.Name, DbType.String);

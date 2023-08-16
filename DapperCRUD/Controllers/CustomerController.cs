@@ -42,21 +42,21 @@ namespace DapperCRUD.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var _Branch = await _iBranchRepository.GetByIdAsync(id);
-            return View(_Branch);
+            var customer = await _customerRepository.GetByIdAsync(id);
+            return View(customer);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Branch branch)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    branch.Id = id;
+                    customer.Id = id;
 
-                    await _iBranchRepository.Update(branch);
+                    await _customerRepository.Update(customer);
                 }
                 catch (Exception ex)
                 {
@@ -64,18 +64,18 @@ namespace DapperCRUD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(branch);
+            return View(customer);
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var _Branch = await _iBranchRepository.GetByIdAsync(id);
+            var _Branch = await _customerRepository.GetByIdAsync(id);
             return View(_Branch);
         }
 
         [HttpDelete, ActionName("DeleteConfirmed")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _iBranchRepository.Delete(id);
+            await _customerRepository.Delete(id);
             return RedirectToAction(nameof(Index));
         }
     }
