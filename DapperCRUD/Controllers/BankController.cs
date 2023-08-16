@@ -23,5 +23,12 @@ namespace DapperCRUD.Controllers
             var res = await _bankRepository.GetAllAsync();
             return Ok(res);
         }
+
+        [HttpGet("Detail")]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var res = await _bankRepository.GetByAddres(id);
+            return Ok(res);
+        }
     }
 }
