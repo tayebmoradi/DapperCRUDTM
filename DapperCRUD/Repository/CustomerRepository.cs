@@ -14,9 +14,9 @@ namespace DapperCRUD.Repository
             _context = context;
         }
 
-        public Task Create(Customer _Customer)
+        public async Task Create(Customer _Customer)
         {
-            var query = "INSERT INTO " + typeof(Branch).Name + " (Name, Family,Phone,Code,BankId) VALUES (@Name, @Tel,@Address,@Code,@BankId)";
+            var query = "INSERT INTO " + typeof(Branch).Name + " (Name, Family,Phone,NationalCode,Mobile) VALUES (@Name, @Family,@Phone,@NationalCode,@Mobile)";
             var parameters = new DynamicParameters();
             parameters.Add("Name", _Customer.Name, DbType.String);
             parameters.Add("Family", _Customer.Family, DbType.String);
@@ -55,9 +55,21 @@ namespace DapperCRUD.Repository
             }
         }
 
-        public Task Update(Customer _Customer)
+        public async Task Update(Customer _Customer)
         {
-            throw new NotImplementedException();
+            var query = "UPDATE Branch SET Name = Name, Family =Family ,Phone = Phone,NationalCode = NationalCode,Mobile=Mobile    WHERE Id = @Id";
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", _Customer.Id, DbType.Int64);
+            parameters.Add("Name", _Customer.Name, DbType.String);
+            parameters.Add("Family", _Customer.Family, DbType.String);
+            parameters.Add("Phone", _Customer.Phone, DbType.Int64);
+            parameters.Add("NationalCode", _Customer.NationalCode, DbType.Int64);
+            parameters.Add("Mobile", _Customer.Mobile, DbType.Int64);
+
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, parameters);
+            }
         }
     }
 }
