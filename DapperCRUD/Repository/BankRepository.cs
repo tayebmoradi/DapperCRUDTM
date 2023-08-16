@@ -16,7 +16,7 @@ namespace DapperCRUD.Repository
 
         public async Task Create(Bank _bank)
         {
-            var query = "INSERT INTO " + typeof(Customer).Name + " (Name, Tel,,Address,Logo) VALUES (@Name, @Tel,@Phone,@Phone,@Logo)";
+            var query = "INSERT INTO " + typeof(Bank).Name + " (Name, Tel,Address,Logo) VALUES (@Name, @Tel,@Address,@Logo)";
             var parameters = new DynamicParameters();
             parameters.Add("Name", _bank.Name, DbType.String);
             parameters.Add("Tel", _bank.Tel, DbType.String);
@@ -46,7 +46,7 @@ namespace DapperCRUD.Repository
 
         public async Task<Bank> GetByAddres(int id)
         {
-            var query = "select *  from Bank  WHERE br.Id = @Id";
+            var query = "select *  from Bank  WHERE Id = @Id";
 
             using (var connection = _context.CreateConnection())
             {
