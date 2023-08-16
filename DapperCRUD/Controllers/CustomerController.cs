@@ -16,5 +16,11 @@ namespace DapperCRUD.Controllers
             var result = await _customerRepository.GetAllAsync();
             return View(result);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var result = await _customerRepository.GetByIdAsync(id);
+            return View(result);
+        }
     }
 }

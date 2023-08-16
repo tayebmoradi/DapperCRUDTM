@@ -14,6 +14,16 @@ namespace DapperCRUD.Repository
             _context = context;
         }
 
+        public Task Create(Customer _Customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<CustomerDto>> GetAllAsync()
         {
 
@@ -24,5 +34,20 @@ namespace DapperCRUD.Repository
 
         }
 
+        public async Task<CustomerDto> GetByIdAsync(int id)
+        {
+            var query = "select br.*,b.Name bankname from Branch as br join Bank as b on b.Id=br.BankId  WHERE br.Id = @Id";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var result = await connection.QuerySingleOrDefaultAsync<CustomerDto>(query, new { id });
+                return result;
+            }
+        }
+
+        public Task Update(Customer _Customer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
