@@ -40,7 +40,7 @@ namespace DapperCRUD.Repository
 
         public async Task<List<Address>> GetAddressesAsync(int id)
         {
-            var query = "select * from Address as a inner join Customer on a.CoustomerId = Customer.Id";
+            var query = "select * from Address as a inner join Customer on a.CustomerId = Customer.Id";
             using var connection = _context.CreateConnection();
             var result = await connection.QueryAsync<Address>(query);
             return result.ToList();

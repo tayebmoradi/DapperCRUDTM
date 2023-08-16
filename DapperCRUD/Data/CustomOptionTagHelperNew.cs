@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using System.Linq;
 
-namespace DapperCRUD.Data.Extensions
+namespace DapperCRUD.Data
 {
     public class CurrentValues
     {
@@ -21,26 +22,19 @@ namespace DapperCRUD.Data.Extensions
 
         //public ICollection<string> ValuesAndEncodedValues { get; set; }
     }
-
-
-    [HtmlTargetElement("customoptions", Attributes = "asp-entity-name")]
-    public class CustomOptionTagHelper : TagHelper
+    [HtmlTargetElement("customoptionsNew", Attributes = "asp-entity-name")]
+    public class CustomOptionTagHelperNew : TagHelper
     {
-        private readonly IBankRepository _bankRepository;
-     
-
-        public CustomOptionTagHelper(
-            IHtmlGenerator generator,
-            IBankRepository bankRepository
-            
-            )
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IHtmlGenerator _generator;
+        public CustomOptionTagHelperNew(IHtmlGenerator generator,
+            ICustomerRepository customerRepository)
         {
-            _bankRepository=bankRepository;
-            Generator = generator;
-           
+           _customerRepository = customerRepository;
+            _generator = generator;
         }
 
-        
+
         [HtmlAttributeName("asp-entity-name")]
         public string EntityName { get; set; }
 
@@ -73,38 +67,35 @@ namespace DapperCRUD.Data.Extensions
                 }
             }
             var items = GetItems();
-           
+            
             if (items == null) return;
-         
+            
 
             if (ShowDefaultItem)
-                output.Content.AppendHtml($"<option value=''>{ "انتخاب کنید"}</option>");
+                output.Content.AppendHtml($"<option value=''>{"انتخاب کنید"}</option>");
 
             foreach (var item in items)
             {
                 bool selected = (selectedValues != null && selectedValues.Contains(item.Value)) ||
                                    encodedValues.Contains(item.Value);
                 var selectedAttr = selected || item.Selected ? "selected='selected'" : "";
-                    output.Content.AppendHtml(item.Value != null
-                        ? $"<option value='{item.Value}' {selectedAttr}>{item.Text}</option>"
-                        : $"<option>{item.Text}</option>");
-                
+                output.Content.AppendHtml(item.Value != null
+                    ? $"<option value='{item.Value}' {selectedAttr}>{item.Text}</option>"
+                    : $"<option>{item.Text}</option>");
+
 
 
             }
-          
+
+           
         }
-
-    
-
-        private IEnumerable<SelectListItem> GetItems( )
+        private IEnumerable<SelectListItem> GetItems()
         {
-            if (string.Equals(this.EntityName, "BankModel", StringComparison.OrdinalIgnoreCase))
-                return _bankRepository.GetAllAsync().Result.Select(r => new SelectListItem() { Value = r.Id.ToString(), Text = r.Name });
+            if (string.Equals(this.EntityName, "CustomerModel", StringComparison.OrdinalIgnoreCase))
+                return _customerRepository.GetAllAsync().Result.Select(r => new SelectListItem() { Value = r.Id.ToString(), Text = r.Name });
             else
                 return null;
         }
-       
-    }
 
+    }
 }

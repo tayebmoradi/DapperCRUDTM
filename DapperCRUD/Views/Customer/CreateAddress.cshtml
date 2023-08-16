@@ -22,7 +22,7 @@
                 <label asp-for="CustomerId" class="control-label"></label>
                 <div class="col-sm-4">
                     <Select asp-for="CustomerId" class="form-control sb-chosenselect">
-                        <customoptions asp-entity-name="BankModel" asp-showdefaultitem="true"></customoptions>
+                        <customoptionsNew asp-entity-name="CustomerModel" asp-showdefaultitem="true"></customoptionsNew>
                     </Select>
                     <span asp-validation-for="CustomerId" class="text-danger"></span>
                 </div>
