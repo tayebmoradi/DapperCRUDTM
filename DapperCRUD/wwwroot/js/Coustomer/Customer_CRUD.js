@@ -1,5 +1,5 @@
 
-var DeleteBranch = function (id) {
+var DeleteCoutomer = function (id) {
     Swal.fire({
         title: 'Do you want to delete this item?',
         icon: 'warning',

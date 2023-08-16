@@ -29,9 +29,13 @@ namespace DapperCRUD.Repository
             await connection.ExecuteAsync(query, parameters);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var query = "DELETE FROM " + typeof(Customer).Name + " WHERE Id = @Id";
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, new { id });
+            }
         }
 
         public async Task<List<Address>> GetAddressesAsync(int id)
