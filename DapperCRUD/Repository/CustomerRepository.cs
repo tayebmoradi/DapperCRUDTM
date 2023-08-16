@@ -34,6 +34,14 @@ namespace DapperCRUD.Repository
             throw new NotImplementedException();
         }
 
+        public async Task<List<Address>> GetAddressesAsync(int id)
+        {
+            var query = "select * from Address WHERE Id = @Id";
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryAsync<Address>(query);
+            return result.ToList();
+        }
+
         public async Task<List<CustomerDto>> GetAllAsync()
         {
 
