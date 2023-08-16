@@ -57,7 +57,7 @@ namespace DapperCRUD.Repository
 
         public async Task Update(Customer _Customer)
         {
-            var query = "UPDATE Customer SET Name = Name, Family =Family ,Phone = Phone,NationalCode = NationalCode,Mobile=Mobile    WHERE Id = @Id";
+            var query = "UPDATE Customer SET Name = @Name, Family =@Family ,Phone = @Phone,NationalCode = @NationalCode,Mobile=@Mobile    WHERE Id = @Id";
             var parameters = new DynamicParameters();
             parameters.Add("Id", _Customer.Id, DbType.Int64);
             parameters.Add("Name", _Customer.Name, DbType.String);
