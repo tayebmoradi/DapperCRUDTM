@@ -16,7 +16,17 @@ namespace DapperCRUD.Repository
 
         public Task Create(Customer _Customer)
         {
-            throw new NotImplementedException();
+            var query = "INSERT INTO " + typeof(Branch).Name + " (Name, Family,Phone,Code,BankId) VALUES (@Name, @Tel,@Address,@Code,@BankId)";
+            var parameters = new DynamicParameters();
+            parameters.Add("Name", _Customer.Name, DbType.String);
+            parameters.Add("Family", _Customer.Family, DbType.String);
+            parameters.Add("Phone", _Customer.Phone, DbType.Int64);
+            parameters.Add("NationalCode", _Customer.NationalCode, DbType.Int64);
+            parameters.Add("Mobile", _Customer.Mobile, DbType.Int64);
+
+            using var connection = _context.CreateConnection();
+
+            await connection.ExecuteAsync(query, parameters);
         }
 
         public Task Delete(int id)
