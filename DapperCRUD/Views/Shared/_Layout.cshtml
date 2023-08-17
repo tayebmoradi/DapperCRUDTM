@@ -1,5 +1,5 @@
 ﻿@using DapperCRUD.Data.Extensions
-<!DOCTYPE html>
+@*<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3 ">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DapperCRUD</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -45,7 +45,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - DapperCRUD - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+          
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -54,3 +54,125 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" href="~/css/css/style.css" rel="stylesheet" />
+	<link type="text/css" href="~/css/css/bootstrap.min.css" rel="stylesheet" />
+	<link type="text/css" href="~/css/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body class="rtl">
+	<!-- Navbar Menu  ---->
+	<section id="nav-bar">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="fa fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav mr-auto">
+					
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Home" asp-action="Index">صفحه اصلی</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Branch" asp-action="Index">شاخه</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Customer" asp-action="Index">مشتری</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Bank" asp-action="GetAllBanks">بانک</a>
+					</li>
+				
+				</ul>
+			</div>
+			<a class="navbar-brand" href="#">
+				<img src="pics/webiz-logo.png" alt="">
+			</a>
+		</nav>
+	</section>
+	<!--- Banner Hero section ------->
+	<section class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<p class="promo-title">مکتب شریف</p>
+					<p class="join-title">برای رشد کسب و کارتان به ما بپیوندید.</p>
+					<a href="#" class="link-play">
+						<img src="svg/play.svg" alt="" class="play-btn">
+					</a>
+				</div>
+				<div class="col-md-6">
+					<img src="svg/undraw_email_campaign_qa8y.svg" alt="" class="img-fluid">
+				</div>
+			</div>
+		</div>
+		<!--- Background wave Hero ---->
+		<img src="pics/ground-min.png" class="bottom-img" alt="">
+	</section>
+
+	<!--- Services ---->
+	<section id="services">
+		<div class="container text-center">
+			@RenderBody()
+		</div>
+	</section>
+	
+	
+	<!-- Footer ------>
+	<section id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 footer-box">
+					<img src="pics/webiz-logo.png" alt="">
+					<p></p>
+					<p>از اینکه ما را همراهی می کنید خرسندیم.</p>
+				</div>
+				<div class="col-md-4 footer-box">
+					<p id="contact"><b>اطلاعات تماس</b></p>
+					<p><i class="fa fa-map-marker"></i>بندرعباس</p>
+					<p><i class="fa fa-phone"></i>07132309534</p>
+					<p><i class="fa fa-envelope-o"></i>info@webrubik.com</p>
+				</div>
+				<div class="col-md-4 footer-box">
+					<p><b>عضویت در خبرنامه</b></p>
+					<input type="email"class="form-control" placeholder="پست الکترونیک">
+					<button type="button"class="btn btn-primary" name="button">عضویت</button>
+
+					<div id="social">
+						<p>شبکه های اجتماعی</p>
+						<div class="social-icons">
+							<a href="#" class="svg-icons"><img src="svg/facebook-logo.svg" alt=""></a>
+							<a href="#" class="svg-icons"><img src="svg/instagram_.svg" alt=""></a>
+							<a href="#" class="svg-icons"><img src="svg/twitter-logo.svg" alt=""></a>
+							<a href="#" class="svg-icons"><img src="svg/whatsapp.svg" alt=""></a>
+						</div>
+					</div>
+				</div>
+				@*<div class="col-md-12">
+					<p class="copyright">Copyright © 2019. All rights reserved | Designed by <a href="https://www.salvatoremandis.it/index-eng.html">Salvatore Mandis</a></p>
+					<p class="copyright">فارسی و راست چین شده توسط <a href="https://www.webrubik.com">Webrubik.com</a></p>
+				</div>*@
+			</div>
+			<br>
+		</div>
+	</section>
+	<!--- Smooth Scroll js ---------->
+	<script src="~/js/jquery-3.1.1.min.js"></script>
+	<script src="~/js/bootstrap.min.js"></script>
+	<script src="~/js/smooth-scroll.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+	<script>
+		var scroll = new SmoothScroll('a[href*="#"]');
+	</script>
+</body><!-- This template has been downloaded from Webrubik.com -->
+</html>
+

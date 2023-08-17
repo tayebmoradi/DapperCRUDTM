@@ -1,4 +1,4 @@
-﻿@model DapperCRUD.Models.BranchDto
+﻿@model DapperCRUD.Models.Bank
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,7 +6,7 @@
 
 <h1>ویرایش</h1>
 
-<h4>شاخه</h4>
+<h4>صفحه انتخاب بانک</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,9 +18,9 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
-                <input asp-for="Code" class="form-control" />
-                <span asp-validation-for="Code" class="text-danger"></span>
+                <label asp-for="Tel" class="control-label"></label>
+                <input asp-for="Tel" class="form-control" />
+                <span asp-validation-for="Tel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
@@ -28,21 +28,13 @@
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tel" class="control-label"></label>
-                <input asp-for="Tel" class="form-control" />
-                <span asp-validation-for="Tel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BankId" class="control-label"></label>
-                <div class="col-sm-4">
-                    <Select asp-for="BankId" class="form-control sb-chosenselect">
-                        <customoptions asp-entity-name="BankModel" asp-showdefaultitem="true"></customoptions>
-                    </Select>
-                    <span asp-validation-for="BankId" class="text-danger"></span>
-                </div>
+                <label for="" class="custom-file-label"> آپلود تصویر *</label>
+                <input type="file" asp-for="Logo" parsley-trigger="change"
+                       placeholder="تصویر " class="custom-file-input form-control" id="Url">
+                <span asp-validation-for="Logo" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Id" />
-            
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -55,5 +47,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

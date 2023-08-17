@@ -71,6 +71,33 @@ namespace DapperCRUD.Controllers
             }
             return View(address);
         }
+
+        public async Task<IActionResult> EditAddress(int id)
+        {
+            var customer = await _customerRepository.GetByIdAsync(id);
+            return View(customer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAddress(int id, Address address)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    address.Id = id;
+
+                    await _addressRepository.Update(address);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(address);
+        }
         public async Task<IActionResult> Edit(int id)
         {
             var customer = await _customerRepository.GetByIdAsync(id);
@@ -97,6 +124,8 @@ namespace DapperCRUD.Controllers
             }
             return View(customer);
         }
+
+     
         public async Task<IActionResult> Delete(int id)
         {
             var _Branch = await _customerRepository.GetByIdAsync(id);
@@ -107,6 +136,14 @@ namespace DapperCRUD.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _customerRepository.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        
+        public async Task<IActionResult> DeleteAddress(int id)
+        {
+            await _addressRepository.Delete(id);
             return RedirectToAction(nameof(Index));
         }
     }
